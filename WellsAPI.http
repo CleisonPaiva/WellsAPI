@@ -1,0 +1,6 @@
+@WellsAPI_HostAddress = http://localhost:5251
+
+GET {{WellsAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
