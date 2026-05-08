@@ -27,7 +27,7 @@ A geospatial REST API for managing and visualizing oil & gas well data from ANP 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/WellsAPI.git
+git clone https://github.com/CleisonPaiva/WellsAPI.git
 cd WellsAPI
 ```
 
@@ -280,7 +280,7 @@ API REST geoespacial para gerenciamento e visualização de dados de poços de p
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/WellsAPI.git
+git clone https://github.com/CleisonPaiva/WellsAPI.git
 cd WellsAPI
 ```
 
