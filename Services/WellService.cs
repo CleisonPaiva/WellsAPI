@@ -159,7 +159,20 @@ namespace WellsAPI.Services
                 query = query.Where(c => c.Longitude >= filterDto.MinLongitude && c.Longitude <= filterDto.MaxLongitude);
             }
 
+            /*
+             *  Zoom 1-5 → visão ampla
+                Zoom 6-9 → estado
+                Zoom 10+ → cidade
+             */
+            int limit = filterDto.Zoom switch
+            {
+                <= 5 => 200,
+                <= 9 => 500,
+                _ => 2000
+            };
+
             return await query
+                .Take(limit)
                 .Select(w => new WellMapDto
                 {
                     Name = w.Name,
@@ -193,6 +206,38 @@ namespace WellsAPI.Services
                     Longitude = w.Longitude,
                 })
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<WellFiltersDto> GetFiltersAsync()
+        {
+            var states = await _context.Wells
+                .Where(w => w.State != null)
+                .Select(w => w.State!)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToListAsync();
+
+            var basins = await _context.Wells
+                .Where(w => w.Basin != null)
+                .Select(w => w.Basin!)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToListAsync();
+
+            var status = await _context.Wells
+                .Where(w => w.Status != null)
+                .Select(w => w.Status!)
+                .Distinct()
+                .OrderBy(s => s)
+                .ToListAsync();
+
+
+            return new WellFiltersDto
+            {
+                States = states,
+                Basins = basins,
+                Statuses = status,
+            };
         }
     }
 }

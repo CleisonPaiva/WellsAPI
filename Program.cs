@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // porta padrão do Vite
+        policy.WithOrigins("http://localhost:5173", "http://localhost:3002", "http://localhost:5000")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -36,7 +36,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 

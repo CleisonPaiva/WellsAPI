@@ -19,5 +19,6 @@
         public decimal? MaxLongitude { get; set; }
         public decimal? MinLatitude { get; set; }
         public decimal? MaxLatitude { get; set; }
+        public int Zoom { get; set; }
     }
 }

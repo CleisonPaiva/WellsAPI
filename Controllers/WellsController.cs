@@ -57,5 +57,12 @@ namespace WellsAPI.Controllers
             return Ok(result);
 
         }
+
+        [HttpGet("filters")]
+        public async Task<IActionResult> GetFilters()
+        {
+            var result = await _wellService.GetFiltersAsync();
+            return Ok(result);
+        }
     }
 }
