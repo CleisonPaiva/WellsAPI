@@ -10,6 +10,7 @@ builder.Services.AddOpenApi();
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));*/
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"CONNECTION STRING RAW: {connectionString}");
 
 if (connectionString != null && connectionString.StartsWith("postgresql://"))
 {
