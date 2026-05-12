@@ -64,4 +64,11 @@ using (var scope = app.Services.CreateScope())
 app.UseAuthorization();
 app.MapControllers();
 
+//Limpar a base de dados, para não precisar ficar apagando o banco toda vez que for rodar o teste
+app.MapGet("/reset", async (AppDbContext db) => {
+    db.Wells.RemoveRange(db.Wells);
+    await db.SaveChangesAsync();
+    return "Limpo";
+});
+
 app.Run();
