@@ -17,7 +17,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:3002", "http://localhost:5000")
+        policy.WithOrigins(
+                    "http://localhost:5173",
+                    "http://localhost:3002",
+                    "http://localhost:5000",
+                    "https://wells-frontend-one.vercel.app"
+                )
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -34,6 +39,13 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/openapi/v1.json", "Wells API v1");
     });
+}
+
+//Rodar Migration para Deploy
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
 }
 
 //app.UseHttpsRedirection();
