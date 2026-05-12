@@ -53,6 +53,8 @@ namespace WellsAPI.Services
                     CreatedAt = DateTime.UtcNow
                 };
 
+                Console.WriteLine($"LAT RAW: '{fields[21]}' | PARSED: {lat}");
+
                 wells.Add(well);
 
 
