@@ -39,8 +39,17 @@ namespace WellsAPI.Services
                     Basin = fields[5],//BACIA
                     Classification = fields[13],//RECLASSIFICACAO
                     Status = fields[14],//SITUACAO
-                    Latitude = decimal.TryParse(fields[21], out var lat) ? lat : null,//LATITUDE_BASE_DD
-                    Longitude = decimal.TryParse(fields[22], out var lng) ? lng : null,//LONGITUDE_BASE_DD
+                    Latitude = decimal.TryParse(
+                        fields[21],
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        out var lat) ? lat : null,
+
+                    Longitude = decimal.TryParse(
+                        fields[22],
+                        System.Globalization.NumberStyles.Any,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        out var lng) ? lng : null,
                     CreatedAt = DateTime.UtcNow
                 };
 
